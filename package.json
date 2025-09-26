@@ -4,8 +4,8 @@
   "description": "A digital notice board system for college departments",
   "main": "index.html",
   "scripts": {
-    "dev": "live-server --port=3000 --open=/index.html",
-    "start": "live-server --port=3000 --open=/index.html"
+    "dev": "live-server --port=3000",
+    "start": "live-server --port=3000"
   },
   "keywords": ["notice-board", "college", "digital-board"],
   "author": "",
