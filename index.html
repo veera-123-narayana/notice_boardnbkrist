@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Notice Board System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>College Notice Board System</h1>
+            <nav>
+                <button onclick="showPage('home')" class="nav-btn active">Home</button>
+                <button onclick="showPage('admin-select')" class="nav-btn">Admin Login</button>
+                <button onclick="showPage('display')" class="nav-btn">Display Board</button>
+            </nav>
+        </header>
+
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <div class="welcome-section">
+                <h2>Welcome to Digital Notice Board</h2>
+                <p>Select a department to view notices or login as admin to manage notices.</p>
+                
+                <div class="department-grid">
+                    <div class="dept-card" onclick="showDepartmentNotices('cse')">
+                        <h3>Computer Science & Engineering</h3>
+                        <p>CSE Department</p>
+                    </div>
+                    <div class="dept-card" onclick="showDepartmentNotices('eee')">
+                        <h3>Electrical & Electronics Engineering</h3>
+                        <p>EEE Department</p>
+                    </div>
+                    <div class="dept-card" onclick="showDepartmentNotices('ece')">
+                        <h3>Electronics & Communication Engineering</h3>
+                        <p>ECE Department</p>
+                    </div>
+                    <div class="dept-card" onclick="showDepartmentNotices('mec')">
+                        <h3>Mechanical Engineering</h3>
+                        <p>MEC Department</p>
+                    </div>
+                    <div class="dept-card" onclick="showDepartmentNotices('civil')">
+                        <h3>Civil Engineering</h3>
+                        <p>Civil Department</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Department Selection -->
+        <div id="admin-select" class="page">
+            <div class="admin-select-section">
+                <h2>Select Department for Admin Login</h2>
+                <div class="department-grid">
+                    <div class="dept-card admin-card" onclick="showAdminLogin('cse')">
+                        <h3>CSE Admin</h3>
+                        <p>Computer Science & Engineering</p>
+                    </div>
+                    <div class="dept-card admin-card" onclick="showAdminLogin('eee')">
+                        <h3>EEE Admin</h3>
+                        <p>Electrical & Electronics Engineering</p>
+                    </div>
+                    <div class="dept-card admin-card" onclick="showAdminLogin('ece')">
+                        <h3>ECE Admin</h3>
+                        <p>Electronics & Communication Engineering</p>
+                    </div>
+                    <div class="dept-card admin-card" onclick="showAdminLogin('mec')">
+                        <h3>MEC Admin</h3>
+                        <p>Mechanical Engineering</p>
+                    </div>
+                    <div class="dept-card admin-card" onclick="showAdminLogin('civil')">
+                        <h3>Civil Admin</h3>
+                        <p>Civil Engineering</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Login Forms -->
+        <div id="admin-login-cse" class="page admin-login">
+            <div class="login-form">
+                <h2>CSE Admin Login</h2>
+                <form onsubmit="adminLogin(event, 'cse')">
+                    <input type="text" id="username-cse" placeholder="Username" required>
+                    <input type="password" id="password-cse" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <button onclick="showPage('admin-select')" class="back-btn">Back</button>
+            </div>
+        </div>
+
+        <div id="admin-login-eee" class="page admin-login">
+            <div class="login-form">
+                <h2>EEE Admin Login</h2>
+                <form onsubmit="adminLogin(event, 'eee')">
+                    <input type="text" id="username-eee" placeholder="Username" required>
+                    <input type="password" id="password-eee" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <button onclick="showPage('admin-select')" class="back-btn">Back</button>
+            </div>
+        </div>
+
+        <div id="admin-login-ece" class="page admin-login">
+            <div class="login-form">
+                <h2>ECE Admin Login</h2>
+                <form onsubmit="adminLogin(event, 'ece')">
+                    <input type="text" id="username-ece" placeholder="Username" required>
+                    <input type="password" id="password-ece" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <button onclick="showPage('admin-select')" class="back-btn">Back</button>
+            </div>
+        </div>
+
+        <div id="admin-login-mec" class="page admin-login">
+            <div class="login-form">
+                <h2>MEC Admin Login</h2>
+                <form onsubmit="adminLogin(event, 'mec')">
+                    <input type="text" id="username-mec" placeholder="Username" required>
+                    <input type="password" id="password-mec" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <button onclick="showPage('admin-select')" class="back-btn">Back</button>
+            </div>
+        </div>
+
+        <div id="admin-login-civil" class="page admin-login">
+            <div class="login-form">
+                <h2>Civil Admin Login</h2>
+                <form onsubmit="adminLogin(event, 'civil')">
+                    <input type="text" id="username-civil" placeholder="Username" required>
+                    <input type="password" id="password-civil" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <button onclick="showPage('admin-select')" class="back-btn">Back</button>
+            </div>
+        </div>
+
+        <!-- Admin Panels for each department -->
+        <div id="admin-panel-cse" class="page admin-panel">
+            <div class="admin-header">
+                <h2>CSE Admin Panel</h2>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+            <div class="admin-content">
+                <form onsubmit="addNotice(event, 'cse')" class="notice-form">
+                    <h3>Add New Notice</h3>
+                    <input type="text" id="title-cse" placeholder="Notice Title" required>
+                    <textarea id="content-cse" placeholder="Notice Content" required></textarea>
+                    <input type="file" id="image-cse" accept="image/*">
+                    <button type="submit">Add Notice</button>
+                </form>
+                <div class="notices-list">
+                    <h3>Current Notices</h3>
+                    <div id="admin-notices-cse"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-panel-eee" class="page admin-panel">
+            <div class="admin-header">
+                <h2>EEE Admin Panel</h2>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+            <div class="admin-content">
+                <form onsubmit="addNotice(event, 'eee')" class="notice-form">
+                    <h3>Add New Notice</h3>
+                    <input type="text" id="title-eee" placeholder="Notice Title" required>
+                    <textarea id="content-eee" placeholder="Notice Content" required></textarea>
+                    <input type="file" id="image-eee" accept="image/*">
+                    <button type="submit">Add Notice</button>
+                </form>
+                <div class="notices-list">
+                    <h3>Current Notices</h3>
+                    <div id="admin-notices-eee"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-panel-ece" class="page admin-panel">
+            <div class="admin-header">
+                <h2>ECE Admin Panel</h2>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+            <div class="admin-content">
+                <form onsubmit="addNotice(event, 'ece')" class="notice-form">
+                    <h3>Add New Notice</h3>
+                    <input type="text" id="title-ece" placeholder="Notice Title" required>
+                    <textarea id="content-ece" placeholder="Notice Content" required></textarea>
+                    <input type="file" id="image-ece" accept="image/*">
+                    <button type="submit">Add Notice</button>
+                </form>
+                <div class="notices-list">
+                    <h3>Current Notices</h3>
+                    <div id="admin-notices-ece"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-panel-mec" class="page admin-panel">
+            <div class="admin-header">
+                <h2>MEC Admin Panel</h2>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+            <div class="admin-content">
+                <form onsubmit="addNotice(event, 'mec')" class="notice-form">
+                    <h3>Add New Notice</h3>
+                    <input type="text" id="title-mec" placeholder="Notice Title" required>
+                    <textarea id="content-mec" placeholder="Notice Content" required></textarea>
+                    <input type="file" id="image-mec" accept="image/*">
+                    <button type="submit">Add Notice</button>
+                </form>
+                <div class="notices-list">
+                    <h3>Current Notices</h3>
+                    <div id="admin-notices-mec"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-panel-civil" class="page admin-panel">
+            <div class="admin-header">
+                <h2>Civil Admin Panel</h2>
+                <button onclick="logout()" class="logout-btn">Logout</button>
+            </div>
+            <div class="admin-content">
+                <form onsubmit="addNotice(event, 'civil')" class="notice-form">
+                    <h3>Add New Notice</h3>
+                    <input type="text" id="title-civil" placeholder="Notice Title" required>
+                    <textarea id="content-civil" placeholder="Notice Content" required></textarea>
+                    <input type="file" id="image-civil" accept="image/*">
+                    <button type="submit">Add Notice</button>
+                </form>
+                <div class="notices-list">
+                    <h3>Current Notices</h3>
+                    <div id="admin-notices-civil"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Display Board -->
+        <div id="display" class="page">
+            <div class="display-header">
+                <h2>Notice Display Board</h2>
+                <div class="department-filter">
+                    <button onclick="filterNotices('all')" class="filter-btn active">All Departments</button>
+                    <button onclick="filterNotices('cse')" class="filter-btn">CSE</button>
+                    <button onclick="filterNotices('eee')" class="filter-btn">EEE</button>
+                    <button onclick="filterNotices('ece')" class="filter-btn">ECE</button>
+                    <button onclick="filterNotices('mec')" class="filter-btn">MEC</button>
+                    <button onclick="filterNotices('civil')" class="filter-btn">Civil</button>
+                </div>
+            </div>
+            <div id="display-notices" class="display-notices"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
